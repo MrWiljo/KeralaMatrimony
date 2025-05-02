@@ -1,1 +1,198 @@
-Welcome to luminar
+package Project_kerala_matrimony;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+
+public class Title_test {
+	WebDriver driver3;
+	
+	@BeforeTest
+	public void Start() {
+		
+		driver3 = new FirefoxDriver();
+		driver3.get("https://www.keralamatrimony.com/");
+		driver3.manage().window().maximize();
+	}
+	
+	@Test
+	public void links() {
+		
+		List<WebElement> Nolinks = driver3.findElements(By.tagName("a"));		//links store in a list
+		System.out.println("Number of Links :: "+Nolinks.size());
+		System.out.println();
+		
+		for(WebElement e:Nolinks) {
+			String w = e.getAttribute("href");			//printing the links
+			System.out.println("* "+w);
+			System.out.println();
+			
+			String l = e.getText();				//printing the name of links
+			System.out.println(l);
+			System.out.println();
+		}
+	}
+	
+	@Test
+	public void Title_varification() {
+		
+		String title = driver3.getTitle();		//title verification
+		System.out.println(title);
+		System.out.println();
+		String Expectedtitle = "Kerala Matrimony - The No. 1 Matrimony Site for Malayalis - KeralaMatrimony.com";
+		
+		if(title.equals(Expectedtitle)) {
+			System.out.println("PASSED :: The title of the site is SAME.");
+		}
+		else {
+			System.out.println("FAILED :: The title of the site is DIFFERENT.");
+		}
+		System.out.println();
+	}
+	
+	@Test
+	public void mouse_movement() {
+		
+		Actions act = new Actions(driver3);
+		WebElement movement = driver3.findElement(By.xpath("//*[@id=\"login-scroll\"]/div[1]/div[2]/div[8]/div/img"));		//'?' code
+		
+		act.moveToElement(movement);
+		
+		if(movement.isDisplayed()) {
+			System.out.println("PASSED : because it shows in the screen.");
+		}else {
+			System.out.println("FAILED : because it is not displaing in the screen.");
+		}
+		System.out.println();
+	}
+	
+	//MODULE ::
+	
+	@Test
+	public void TandC() {
+		
+		driver3.findElement(By.xpath("//*[@id=\"bmfont\"]/div/div[3]/span/a[1]")).click();
+		driver3.navigate().to("https://www.keralamatrimony.com/terms.php");						//next url
+		
+		driver3.findElement(By.xpath("//*[@id=\"close\"]/center[1]/div/div[1]/div/div[2]/div/div")).click();
+		
+		
+	}
+	
+	@Test
+	public void privacypolicy() {
+		driver3.findElement(By.xpath("//*[@id=\"bmfont\"]/div/div[3]/span/a[2]")).click();     
+		driver3.navigate().to("https://www.keralamatrimony.com/privacy-policy.php");
+	}
+	
+	@Test
+	public void link_selection() {
+		JavascriptExecutor wise = (JavascriptExecutor)driver3;
+		driver3.findElement(By.xpath("https://www.keralamatrimony.com/terms.php"));
+		wise.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+		
+		JavascriptExecutor fr = (JavascriptExecutor) driver3;
+		WebElement free_registrer = driver3.findElement(By.id("scroll1"));
+		fr.executeScript("arguments[0].scrollIntoView();", free_registrer);
+
+		driver3.findElement(By.xpath("//*[@id=\"scroll1\"]")).click();
+		
+	}
+	
+	@Test
+	public void link_navigate() {
+		
+		//scroll needed
+		
+		driver3.findElement(By.xpath("//*[@id=\"close\"]/center[2]/div[3]/div/div/div[3]/div[3]/div/div[1]/a/div[1]/img")).click();		
+		driver3.navigate().to("https://www.keralamatrimony.com/success/bharat-matrimony-success-story-we-met-through-keralamatrimony-arun-and-gana.php");
+	}
+	
+	@Test
+	public void down_links() {
+		
+		JavascriptExecutor wise = (JavascriptExecutor)driver3;
+		driver3.get("https://www.keralamatrimony.com/");
+		wise.executeScript("windows.scrollBy(0,1000)");
+		
+		driver3.findElement(By.xpath("//*[@id=\"close\"]/center[2]/div[19]/div[1]/div[2]/a[1]")).click();		//assamees
+		driver3.navigate().to("https://www.assamesematrimony.com/");		//new tab
+//		
+		driver3.navigate().back();
+		driver3.findElement(By.xpath("//*[@id=\"close\"]/center[2]/div[19]/div[1]/div[2]/a[12]")).click();	//punjab
+		driver3.navigate().to("https://www.punjabimatrimony.com/");			// new tab
+//		
+		driver3.navigate().back();
+		driver3.findElement(By.xpath("//*[@id=\"close\"]/center[2]/div[19]/div[1]/div[2]/a[15]")).click();
+		driver3.navigate().to("https://www.tamilmatrimony.com/");			//new tb -- tamil
+//		
+	}
+//	
+	@Test
+	public void social_media() {
+//		
+		JavascriptExecutor sc = (JavascriptExecutor)driver3;
+		driver3.get("https://www.keralamatrimony.com/");
+		sc.executeScript("windows.scrollBy(0,1000)");
+//		
+		driver3.findElement(By.xpath("//*[@id=\"close\"]/center[2]/div[21]/div[3]/ul/li[1]/a/img")).click(); 		//facebook-click
+		driver3.navigate().to("https://www.facebook.com/BharatMatrimony");		//facebook page.
+//		
+		driver3.navigate().back();
+		driver3.findElement(By.xpath("//*[@id=\"close\"]/center[2]/div[21]/div[3]/ul/li[2]/a/img")).click();		//twitter-click
+		driver3.navigate().to("https://twitter.com/bharatmatrimony");		//twitter page
+//		
+		driver3.navigate().back();
+		driver3.findElement(By.xpath("//*[@id=\"close\"]/center[2]/div[21]/div[3]/ul/li[3]/a/img")).click();		//inst-click
+		driver3.navigate().to("https://www.instagram.com/bharatmatrimony/"); 		//insta page
+//		
+	}
+	
+	@Test
+	public void mandap() throws InterruptedException {
+//		
+		driver3.findElement(By.xpath("//*[@id=\"MandapBlock\"]/div[1]")).click(); 		//click on mandap
+		Thread.sleep(3000);
+		driver3.findElement(By.xpath("//*[@id=\"MandapBlock\"]/div[2]/div/div/div[4]/a[5]")).click();		//view more
+		driver3.navigate().to("https://www.mandap.com/alappuzha");	//mandap new tab
+//		
+		driver3.navigate().back();
+//		
+		driver3.findElement(By.xpath("/html/body/center[2]/div[17]/div/div[2]/div[2]/div[2]/div/div[1]/div[1]/div[2]/div[1]")).click();		//community matrimony
+		driver3.findElement(By.xpath("//*[@id=\"CommunityMatrimonyBlock\"]/div[2]/div/div[1]/div[8]")).click();		//vishwagar-click
+		Thread.sleep(3000);
+		driver3.findElement(By.xpath("//*[@id=\"bmVishwakarmaMatrimony\"]/div[6]/a[6]")).click();		//state - view more
+		Thread.sleep(3000);
+		driver3.navigate().to("https://www.vishwakarmamatrimony.com/state-matrimony");			//new tab
+//		
+		driver3.navigate().back();
+//		
+	}
+	
+	@Test
+	public void questions() throws Exception {
+		
+		
+		driver3.findElement(By.xpath("//*[@id=\"FAQ-Contents-Block\"]/div[3]/div[1]")).click(); 	//expand the question
+		Thread.sleep(3000);
+		driver3.findElement(By.xpath("//*[@id=\"FAQ-Contents-Block\"]/div[3]/div[1]")).click();		//shrink the question
+		
+	}
+	
+	
+	@AfterTest
+	public void end() throws InterruptedException {
+		driver3.quit();
+		Thread.sleep(3000);
+	}
+}
