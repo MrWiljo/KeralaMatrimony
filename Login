@@ -1,0 +1,225 @@
+package Project_kerala_matrimony;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Log_in_test {
+WebDriver Driver;
+	
+	@BeforeTest
+	public void Run() {
+		
+		//code opening the chrome browser
+		Driver = new FirefoxDriver();
+//		ChromeOptions options = new ChromeOptions();
+//		options.addArguments("--remote-allow-origins=*");
+//		Driver=new ChromeDriver(options);
+		
+		Driver.get("https://www.keralamatrimony.com/");
+		Driver.manage().window().maximize();
+	}
+	
+	@Test
+	public void Testing_login() throws Exception {
+		
+		
+		
+		//MODULE 1 : 
+		
+		Driver.findElement(By.xpath("//*[@id=\"selprofile\"]")).click();		//select profile code
+		
+		WebElement friend = Driver.findElement(By.xpath("//*[@id=\"5\"]/label"));				//select as friend
+		WebElement Myself = Driver.findElement(By.xpath("//*[@id=\"1\"]/label")); 				//select as myself
+		WebElement Daughter = Driver.findElement(By.xpath("//*[@id=\"9\"]/label"));				//select as Daughter
+		WebElement Son = Driver.findElement(By.xpath("//*[@id=\"8\"]/label"));					//select as Son
+		WebElement Sister = Driver.findElement(By.xpath("//*[@id=\"11\"]/label")); 				//select as Sister
+		WebElement Brother = Driver.findElement(By.xpath("//*[@id=\"10\"]/label"));				//select as Brother
+		WebElement Relative = Driver.findElement(By.xpath("//*[@id=\"4\"]/label")); 			//select as Relative
+		
+		friend.click();				//selected as friend.
+		
+		WebElement Male = Driver.findElement(By.xpath("//*[@id=\"GENDER_VALUE\"]/li[1]/label")); 		//Gender - male
+		WebElement Female = Driver.findElement(By.xpath("//*[@id=\"GENDER_VALUE\"]/li[2]/label")); 		//Gender -  Female
+		
+		Male.click();			//selected as Male
+		
+		Driver.findElement(By.xpath("//*[@id=\"NAME\"]")).sendKeys("Vishnu",Keys.ENTER);			//Friend's name enter
+		
+		WebElement Number = Driver.findElement(By.xpath("//*[@id=\"MOBILENO\"]"));		//Enter the number
+		Number.sendKeys("7306265983");
+		Thread.sleep(5000);
+		Number.submit();						//Enter the register button
+		
+		
+		
+		//MODULE 2 :
+		
+		Driver.findElement(By.id("DOBVALUE")).click();		//DOB enter code
+		
+		WebElement Month = Driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/div/div/select[1]"));
+		Select month = new Select(Month);					//select class object created
+		month.selectByIndex(8); 									//Month Selected.
+		
+		WebElement Year = Driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/div/div/select[2]"));
+		Select year = new Select(Year);
+		year.selectByValue("1996");				//Year selection.
+		
+		Driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[4]/td[1]/a")).click();		//Date selection -- 22.
+		
+		WebElement Religion = Driver.findElement(By.xpath("//*[@id=\"RELIGION\"]"));		//Religion Selection
+		Select religion = new Select(Religion);
+		religion.selectByIndex(1);						//Religion - Hindu
+		
+		Driver.findElement(By.xpath("//*[@id=\"EMAIL\"]")).sendKeys("wiljonupz@gmail.com",Keys.TAB);		//entering the mail ID
+		
+		Thread.sleep(5000);
+		
+		Driver.findElement(By.xpath("//*[@id=\"PASSWORD\"]")).sendKeys("midhun123456",Keys.ENTER);		//password
+		
+		
+		
+		//MODULE 3 :
+		
+		Driver.findElement(By.xpath("//*[@id=\"s2id_CASTE_NORMAL\"]/a")).click();		//cast selection
+		Driver.findElement(By.xpath("//*[@id=\"s2id_autogen1_search\"]")).sendKeys("thiyya",Keys.ENTER);		//entering the cast -- thiyya.
+		
+		Driver.findElement(By.xpath("//*[@id=\"s2id_autogen3_search\"]")).sendKeys("thiyya",Keys.ENTER); 		//sub-caste selection search bar code.
+		
+		Thread.sleep(5000);
+		
+		//checking whether is it possible to continue withpout entering the optional details.
+		Driver.findElement(By.xpath("//*[@id=\"MatriForm\"]/div/div[4]/div[2]/div/div[9]/input")).click();		//continue button click code
+		
+		
+		
+		//MODULE 4 :
+		
+		//personal details
+		
+		//Marital status
+		WebElement nevermarried = Driver.findElement(By.xpath("//*[@id=\"MatriForm\"]/div/div[6]/div[2]/div/div[2]/div[2]/label[1]"));
+		WebElement widowed = Driver.findElement(By.xpath("//*[@id=\"ms_label\"]"));
+		WebElement divorced = Driver.findElement(By.xpath("//*[@id=\"MatriForm\"]/div/div[6]/div[2]/div/div[2]/div[2]/label[3]"));
+		WebElement Awaitingdevorce = Driver.findElement(By.xpath("//*[@id=\"MatriForm\"]/div/div[6]/div[2]/div/div[2]/div[2]/label[4]"));
+		
+		nevermarried.click();
+		
+		//Height
+		Driver.findElement(By.xpath("//*[@id=\"s2id_FEET\"]/a")).click();	//height click
+		Driver.findElement(By.xpath("//*[@id=\"s2id_autogen5_search\"]")).sendKeys("165",Keys.ENTER);
+		
+		//Family Status
+		WebElement Middleclass = Driver.findElement(By.xpath("//*[@id=\"familystatus\"]/label[1]"));
+		WebElement upperclass = Driver.findElement(By.xpath("//*[@id=\"familystatus\"]/label[2]"));
+		WebElement rich = Driver.findElement(By.xpath("//*[@id=\"familystatus\"]/label[3]"));
+		WebElement affluent = Driver.findElement(By.xpath("//*[@id=\"familystatus\"]/label[4]"));
+		
+		Middleclass.click();
+		
+		//Family type
+		WebElement joint = Driver.findElement(By.xpath("//*[@id=\"familytype\"]/label[1]"));
+		WebElement nuclear = Driver.findElement(By.xpath("//*[@id=\"familytype\"]/label[2]"));
+		
+		nuclear.click();
+		
+		//Family values
+		WebElement ortho = Driver.findElement(By.xpath("//*[@id=\"familyvalue\"]/label[1]"));
+		WebElement Tradi = Driver.findElement(By.xpath("//*[@id=\"familyvalue\"]/label[2]"));
+		WebElement moderate = Driver.findElement(By.xpath("//*[@id=\"familyvalue\"]/label[3]"));
+		WebElement liberal = Driver.findElement(By.xpath("//*[@id=\"familyvalue\"]/label[4]"));
+		
+		liberal.click();
+		
+		//Disabilities
+		WebElement no = Driver.findElement(By.xpath("//*[@id=\"physical_status\"]/label[1]"));
+		WebElement challenged  = Driver.findElement(By.xpath("//*[@id=\"physical_status\"]/label[2]"));
+		
+		no.click();
+		
+		Thread.sleep(5000);
+		
+		//continue
+		Driver.findElement(By.xpath("//*[@id=\"MatriForm\"]/div/div[6]/div[2]/div/div[9]/input")).click();
+		
+		
+		//MODULE 5 :: 
+		
+		//education and job
+		
+		Driver.findElement(By.xpath("//*[@id=\"s2id_EDUCATION\"]/a")).click();		//higher qualification - click
+		Driver.findElement(By.xpath("//*[@id=\"s2id_autogen7_search\"]")).sendKeys("B.tech",Keys.ENTER);		//entering the course
+		
+		//job sector
+		WebElement gover = Driver.findElement(By.xpath("//*[@id=\"subcaste_div\"]/div[2]/label[1]"));
+		WebElement priva = Driver.findElement(By.xpath("//*[@id=\"subcaste_div\"]/div[2]/label[2]"));
+		WebElement Bussinuss = Driver.findElement(By.xpath("//*[@id=\"subcaste_div\"]/div[2]/label[3]"));
+		WebElement defedn = Driver.findElement(By.xpath("//*[@id=\"subcaste_div\"]/div[2]/label[4]"));
+		WebElement Selfemplo = Driver.findElement(By.xpath("//*[@id=\"subcaste_div\"]/div[2]/label[5]"));
+		WebElement Notworking = Driver.findElement(By.xpath("//*[@id=\"subcaste_div\"]/div[2]/label[6]"));
+		
+		priva.click();
+		
+		//Occupation
+		Driver.findElement(By.xpath("//*[@id=\"s2id_OCCUPATION\"]/a")).click();		//occupation - click
+		Driver.findElement(By.xpath("//*[@id=\"s2id_autogen8_search\"]")).sendKeys("software",Keys.ENTER);		//entering occupation.
+		
+		//Annual income
+		Driver.findElement(By.xpath("//*[@id=\"s2id_OPTIONALINCOME\"]/a")).click();
+		Driver.findElement(By.xpath("//*[@id=\"s2id_autogen10_search\"]")).sendKeys("2-3",Keys.ENTER);
+		
+		//State
+		Driver.findElement(By.xpath("//*[@id=\"s2id_RESIDINGSTATE_SEL\"]/a")).click();
+		Driver.findElement(By.xpath("//*[@id=\"s2id_autogen12_search\"]")).sendKeys("kerala",Keys.ENTER);
+		
+		//City
+		Driver.findElement(By.xpath("//*[@id=\"s2id_RESIDINGCITY_SEL\"]/a")).click();
+		Driver.findElement(By.xpath("//*[@id=\"s2id_autogen13_search\"]")).sendKeys("kozhikode",Keys.ENTER);
+		
+		Thread.sleep(5000);
+		
+		Driver.findElement(By.xpath("//*[@id=\"MatriForm\"]/div/div[8]/div[2]/div/div[9]/input")).click();		//continue - click
+		
+		
+		
+		//MODULE 6
+		
+		Thread.sleep(5000);
+		
+		Driver.findElement(By.xpath("//*[@id=\"submitform\"]")).click();		//complete - click
+		
+		
+		//MODULE 7
+		
+		Thread.sleep(6000);
+		Driver.findElement(By.xpath("//*[@id=\"Verify\"]")).click();			//verify
+		
+		Driver.findElement(By.xpath("//*[@id=\"cboxClose\"]")).submit();		//last close.
+		
+		//MODULE 7
+		//photo upload
+		
+		Driver.findElement(By.xpath("//*[@id=\"register-form\"]/div[3]/div[4]/div/a/button")).submit();		//do later option
+		
+		Driver.findElement(By.xpath("//*[@id=\"confirmationcontent\"]/a[1]/span")).click();		//alert for not uploading the pic
+		
+		//logedIn done
+		//MODULE 8
+		
+		Actions acti = new Actions(Driver);
+		WebElement logout = Driver.findElement(By.xpath("//*[@id=\"collapsibleNavbar\"]/ul[2]/li[1]"));
+		
+		acti.moveToElement(logout);
+		
+		Driver.findElement(By.xpath("//*[@id=\"collapsibleNavbar\"]/ul[2]/li[1]/div/div/div[3]/ul[2]/li[3]/a/span")).click(); 	//logout
+	}
+}
