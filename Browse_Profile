@@ -1,0 +1,48 @@
+package Project_kerala_matrimony;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.github.dockerjava.api.model.Driver;
+
+public class Browse_profile {
+	WebDriver Driver2;
+	
+	@BeforeTest
+	public void Start() {
+		Driver2 = new FirefoxDriver();
+		Driver2.get("https://www.keralamatrimony.com/");
+		Driver2.manage().window().maximize();
+	}
+	
+	@Test
+	public void Browse_test() throws InterruptedException {
+		//MODULE 1 : 
+		
+				Driver2.findElement(By.xpath("//*[@id=\"login-scroll\"]/div[1]/div[2]/div[1]/div[1]/div")).click();		//In home page 'browse profiles by' click code
+				
+				WebElement Religion = Driver2.findElement(By.xpath("//*[@id=\"myDropdown\"]/div[2]/div[1]")); 	//'by Religion' code
+					WebElement Hindu = Driver2.findElement(By.xpath("//*[@id=\"bmReligion\"]/div[1]/ul/li[1]/a")); 	//Religion - hindu
+					WebElement Budhist = Driver2.findElement(By.xpath("//*[@id=\"bmReligion\"]/div[2]/ul/li[1]/a")); 	//Religion - Bhudhissm
+					WebElement Muslim = Driver2.findElement(By.xpath("//*[@id=\"bmReligion\"]/div[1]/ul/li[2]/a")); 	//religion - muslim
+					WebElement Christian = Driver2.findElement(By.xpath("//*[@id=\"bmReligion\"]/div[1]/ul/li[3]/a")); 	//religion - christian
+					
+				WebElement Caste = Driver2.findElement(By.xpath("//*[@id=\"myDropdown\"]/div[2]/div[2]"));
+					WebElement nair = Driver2.findElement(By.xpath("//*[@id=\"bmCaste\"]/div[1]/ul/li[1]/a"));
+					WebElement RC = Driver2.findElement(By.xpath("//*[@id=\"bmCaste\"]/div[1]/ul/li[3]/a"));
+					WebElement mapila = Driver2.findElement(By.xpath("//*[@id=\"bmCaste\"]/div[2]/ul/li[2]/a")); 
+				
+				Religion.click();
+				Thread.sleep(5000);
+					Hindu.click();
+					Thread.sleep(5000);
+					
+					Driver2.navigate().to("https://www.keralamatrimony.com/hindu-matrimony");	//navigated to hindu page.
+					
+	}
+}
